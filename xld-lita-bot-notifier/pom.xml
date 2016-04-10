@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.xebialabs.xldeploy.notifier</groupId>
+  <artifactId>xld-lita-bot-notifier</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>xld-lita-bot-notifier</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+<dependency>
+    <groupId>com.mashape.unirest</groupId>
+    <artifactId>unirest-java</artifactId>
+    <version>1.4.7</version>
+</dependency>
+      <dependency>
+         <groupId>com.xebialabs.xldeploy</groupId>
+         <artifactId>engine-spi</artifactId>
+         <scope>system</scope>
+         <version>2015.6.3</version>
+         <systemPath>/opt/xl-deploy-5.1.3-server/lib/engine-spi-2015.6.3.jar</systemPath>
+      </dependency>
+      <dependency>
+         <groupId>com.xebialabs.xldeploy</groupId>
+         <artifactId>udm-plugin-api</artifactId>
+         <scope>system</scope>
+         <version>2015.6.3</version>
+         <systemPath>/opt/xl-deploy-5.1.3-server/lib/udm-plugin-api-2015.6.3.jar</systemPath>
+      </dependency>
+      <dependency>
+         <groupId>com.xebialabs.xldeploy</groupId>
+         <artifactId>engine-api</artifactId>
+         <scope>system</scope>
+         <version>2015.6.3</version>
+         <systemPath>/opt/xl-deploy-5.1.3-server/lib/engine-api-2015.6.3.jar</systemPath>
+      </dependency>
+      <dependency>
+         <groupId>nl.javadude.t2bus</groupId>
+         <artifactId>t2-bus</artifactId>
+         <scope>system</scope>
+         <version>1.2.1</version>
+         <systemPath>/opt/xl-deploy-5.1.3-server/lib/t2-bus-1.2.1.jar</systemPath>
+      </dependency>
+<dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore-nio</artifactId>
+        <version>4.4.3</version>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<rules xmlns="http://www.xebialabs.com/xl-deploy/xl-rules">
+    <rule name="LitaBotNotify" scope="pre-plan">
+        <planning-script-path>lita-notify/install.py</planning-script-path>
+	</rule>
+</rules>

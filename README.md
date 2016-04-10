@@ -24,7 +24,7 @@ This repository contains the following:
 
 ## Installing Lita
 
-To install Lita you need the following dependencies:
+To install [Lita](https://docs.lita.io/getting-started/) you need the following dependencies:
 
 * Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
 * Redis, version 2.6 or greater

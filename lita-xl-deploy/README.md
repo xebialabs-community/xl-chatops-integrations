@@ -8,19 +8,18 @@ This bot makes XL Deploy an active part of your DevOps communication. Include XL
 
 ## Installation
 
-See the [Lita installation documentation](https://docs.lita.io/getting-started/installation/) for instructions on how to setup a Lita bot.
+To install [Lita](https://docs.lita.io/getting-started/) you need the following dependencies:
 
-Add lita-xl-deploy handler to your bot by adding it to your Lita instance's Gemfile:
+* Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
+* Redis, version 2.6 or greater
 
-``` ruby
-gem "lita-xl-deploy"
+If these are installed, you can install Lita itself as follows:
+
+```
+gem install lita
 ```
 
-Or, if you run it directly from source:
-
-``` ruby
-gem "lita-xl-deploy", :path => "/path/to/lita-xl-deploy"
-```
+See the [sample-bot](../sample-bot) project for an easy-to-use, complete Lita bot setup.
 
 ## Configuration
 

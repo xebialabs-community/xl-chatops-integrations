@@ -20,25 +20,6 @@ This repository contains the following:
 * [xld-lita-bot-notifier](xld-lita-bot-notifier): a plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information out to the bot
 * [sample-bot](sample-bot): a sample bot configuration
 
-# Installation
-
-## Installing Lita
-
-To install [Lita](https://docs.lita.io/getting-started/) you need the following dependencies:
-
-* Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
-* Redis, version 2.6 or greater
-
-If these are installed, you can install Lita itself as follows:
-
-```
-gem install lita
-```
-
-## Installing the [XL Deploy](https://www.xebialabs.com/products/xl-deploy) notifier
-
-The [XL Deploy](https://www.xebialabs.com/products/xl-deploy) bot notifier is a plugin for XL Deploy that broadcasts task status changes to the bot. The plugin is installed in XL Deploy like any regular plugin. See the [xld-lita-bot-notifier](xld-lita-bot-notifier) project for more information.
-
 # Running the sample bot
 
 To try the sample bot, see further instructions in the [sample-bot](sample-bot) project.

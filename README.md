@@ -20,9 +20,9 @@ This repository contains the following:
 * [xld-lita-bot-notifier](xld-lita-bot-notifier): a plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information out to the bot
 * [sample-bot](sample-bot): a sample bot configuration
 
-# Running the sample bot
+# Quick start
 
-To try the sample bot, see further instructions in the [sample-bot](sample-bot) project.
+The [sample-bot](sample-bot) project is the easiest way to get a bot up and running.
 
 # Feedback
 

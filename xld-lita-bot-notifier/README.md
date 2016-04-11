@@ -2,7 +2,15 @@ This is an [XL Deploy](https://www.xebialabs.com/products/xl-deploy) plugin that
 
 # Configuration
 
-The notifier requires the URL to the bot to run. This URL can be configured ...???
+The notifier requires the URL to the bot to run. This URL can be configured via a file called `xld-bot.conf` in the XL Deploy `conf` directory.
+
+Here is a sample:
+
+```
+bot.url=http://bot.xebialabs.com:8080
+```
+
+If the configuration file is not found, the notifier defaults to using `http://localhost:8080`.
 
 # Requirements
 

@@ -2,15 +2,11 @@ This repository contains a bot to integrate [XebiaLabs](https://www.xebialabs.co
 
 # Introduction
 
-Communication is the centerpiece of a successful DevOps strategy. Today's IT organisation is often distributed, causing widespread use of chat tools for persistent, real-time communication. Tools such as HipChat and Slack are gaining a wide following.
+Collaboration & team work are two of the cornerstones of how we work at XebiaLabs. Being a distributed team, this means using a chat tool to discuss and keep your team members up-to-date. More and more, we have been including our tools in the chat room as well -- JIRA, Zendesk, PagerDuty... as well as our own tools of course!
 
-Collaborating with your team via a chat tool is useful, but there is a piece of the conversation missing: the tools you use to do your job. Leading DevOps teams have started including their tools in the conversation by connecting them to their chat tool of choice. In the resulting conversation, in addition to coordination and information exchange, team members work together to get their job done -- right from within the chat room!
+We've written an internal bot to connect XL Deploy to our chat room. This bot, based on the [Lita](http://www.lita.io) framework, allows communication to and from XL Deploy.
 
-This pattern is known as _ChatOps_ and is a highly effective way of organising your DevOps team.
-
-We at XebiaLabs practice this pattern internally and have started using our own tools in the same manner. Here you will find a connector that allows XL Deploy to become part of a DevOps conversation.
-
-Give it a shot & let us know what you think!
+The source code is published here for you to try out. Give it a shot & let us know what you think!
 
 # Contents
 

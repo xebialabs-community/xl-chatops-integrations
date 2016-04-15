@@ -4,7 +4,7 @@
   <groupId>com.xebialabs.xldeploy.notifier</groupId>
   <artifactId>xld-lita-bot-notifier</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>xld-lita-bot-notifier</name>
   <url>http://maven.apache.org</url>
   <dependencies>

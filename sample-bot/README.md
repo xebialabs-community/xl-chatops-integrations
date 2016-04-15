@@ -45,6 +45,8 @@ You can also check the available environments:
 
 If this works, your connection to XL Deploy is configured correctly.
 
+See the [usage documentation](https://github.com/mpvvliet/xl-chatops-integrations/tree/master/lita-xl-deploy#usage) for more information on what the bot can do.
+
 # Connecting to HipChat
 
 If you want to connect your bot to HipChat, change the [lita_config.rb](lita_config.rb) by including the _hipchat_ adapter:

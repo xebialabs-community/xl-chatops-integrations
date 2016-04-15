@@ -1,9 +1,5 @@
 This is a sample [Lita](https://docs.lita.io/) bot that is configured to connect to an XL Deploy instance.
 
-# Setup
-
-This sample Lita bot is configured to include the lita-xl-deploy _handler_, enabling it to communicate with an XL Deploy instance. The instance uses the _shell_ adapter, enabling you to interact with the bot directly from the command line. The connection to XL Deploy (URL, username, password) must also be configured.
-
 # Prerequisites
 
 See the [top level README](../README.md) for general prerequisites.
@@ -64,5 +60,7 @@ If you want to connect your bot to HipChat, change the [lita_config.rb](lita_con
 Uncomment the line to include the lita-hipchat gem in the [Gemfile](Gemfile), ensure the gem is installed and restart the bot.
 
 # Configuration
+
+This sample Lita bot is configured to include the lita-xl-deploy _handler_, enabling it to communicate with an XL Deploy instance. The instance uses the _shell_ adapter, enabling you to interact with the bot directly from the command line. The connection to XL Deploy (URL, username, password) must also be configured.
 
 The bot's configuration is stored in the [lita_config.rb](lita_config.rb) file. Modify this file to suit your needs.

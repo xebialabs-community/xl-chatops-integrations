@@ -2,7 +2,7 @@ This is a sample [Lita](https://docs.lita.io/) bot that is configured to connect
 
 # Prerequisites
 
-See the [top level README](../README.md) for general prerequisites.
+See the [top level README](../README.md#prerequisites) for general prerequisites.
 
 In addition, ensure all Ruby libraries required by this bot are installed by executing the following command in this directory:
 

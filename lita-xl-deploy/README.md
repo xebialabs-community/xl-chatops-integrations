@@ -1,14 +1,18 @@
-# lita-xl-deploy
+This is a handler for the [Lita](https://www.lita.io/) bot framework that connects to [XL Deploy](https://xebialabs.com/products/xl-deploy/).
 
-ChatOps bot for [XL Deploy](https://xebialabs.com/products/xl-deploy/).
+Using this handler, you can make XL Deploy an active part of your DevOps communication. Include XL Deploy in your chat room and collaborate with your team on planning, performing and troubleshooting deployments.
 
-The lita-xl-deploy bot is a bot based on the [Lita](https://www.lita.io/) chat bot framework written in Ruby.
+# Prerequisites
 
-This bot makes XL Deploy an active part of your DevOps communication. Include XL Deploy in your chat room and collaborate with your team on planning, performing and troubleshooting deployments.
+See the [top level README](../README.md) for prerequisites.
 
-## Features
+# Quick start
 
-### Chatting with XL Deploy
+See the [sample-bot](../sample-bot) project for an easy-to-use, complete Lita bot setup.
+
+# Features
+
+## Chatting with XL Deploy
 
 The bot makes it possible to "chat" with XL Deploy. The following interactions are possible:
 
@@ -17,19 +21,19 @@ The bot makes it possible to "chat" with XL Deploy. The following interactions a
 * inspect a task step log
 * start a new deployment
 
-### Connecting to XL Deploy
+## Connecting to XL Deploy
 
 The bot connects to XL Deploy using a URL / username / password combination configured in the `lita_config.rb` file. The bot interacts with XL Deploy as this user and has all permissions associated with the user. For instance, if you configure the bot to connect as an admin user to XL Deploy, then everyone in the chat room has the ability to start deployments as the admin user.
 
 We recommend you configure the bot with a user with restricted permissions to prevent unintentional privilige escalation.
 
-### Task ids
+## Task ids
 
 Tasks in XL Deploy are referred to using GUIDS, globally unique identifiers. These ids are long and cumbersome to use when communicating via a chat tool.
 
 The bot generates unique, 5 character ids for each task GUID it encounters. These short ids are used to communicate about tasks with the chat room members. Each short id is remembered during the configured context storage period configured via configuration option `context_storage_timeout`. After this timeout expires, the short id is purged from storage and no longer accessible. The bot will generate a new short id the next time it encounters the task GUID.
 
-### Conversation context
+## Conversation context
 
 The bot keeps track of the conversation it has with a user in a particular room. Specifically, the bot remembers the latest task, application, version and environment that have been mentioned by a user. This makes the following interaction possible:
 
@@ -57,7 +61,7 @@ Note that the bot inferred the user was talking about task `fd5hr` when he gave 
 
 Whenever a user lists available applications, environments, versions or deployments, the conversation context for that user in that room is reset.
 
-### Starting deployments
+## Starting deployments
 
 To start a deployment, the following command can be used:
 
@@ -85,21 +89,6 @@ If you omit any of the components, the bot will attempt to retrieve the values f
  [Lita] (using env TEST)
         ...
 ```
-
-## Installation
-
-To install [Lita](https://docs.lita.io/getting-started/) you need the following dependencies:
-
-* Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
-* Redis, version 2.6 or greater
-
-If these are installed, you can install Lita itself as follows:
-
-```
-gem install lita
-```
-
-See the [sample-bot](../sample-bot) project for an easy-to-use, complete Lita bot setup.
 
 ## Configuration
 

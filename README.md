@@ -16,6 +16,39 @@ This repository contains the following:
 * [xld-lita-bot-notifier](xld-lita-bot-notifier): a plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information out to the bot
 * [sample-bot](sample-bot): a sample bot configuration
 
+# Prerequisites
+
+To run the bot, you need to install [Lita](https://docs.lita.io/getting-started/). Lita requires the following dependencies:
+
+* Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
+* Ruby development libraries and header files
+* gcc and make
+* Redis, version 2.6 or greater
+
+## Installing Ruby 2.0
+
+If your environment does not have Ruby 2.0 installed (for instance on Ubuntu 14), you can install it using the following commands:
+
+```
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.0 ruby2.0-dev
+```
+
+## Installing Redis
+
+```
+sudo apt-get install redis-server
+```
+
+## Installing Lita
+
+Lita itself is installed as follows:
+
+```
+sudo gem install lita
+```
+
 # Quick start
 
 The [sample-bot](sample-bot) project is the easiest way to get a bot up and running.

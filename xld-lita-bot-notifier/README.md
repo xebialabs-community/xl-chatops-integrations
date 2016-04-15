@@ -14,7 +14,13 @@ The notifier has been tested with XL Deploy 5.1.x.
 
 # Installation
 
-Install the notifier as a regular plugin by copying the JAR file into the XL Deploy installation's _plugins_ folder. Restart XL Deploy to enable the plugin.
+Install the libraries from this project's `lib` folder into your XL Deploy installation's `lib` folder:
+
+```
+cp lib/*.jar /path/to/xl-deploy/lib
+```
+
+Next, install the notifier as a regular plugin by copying the JAR file into the XL Deploy installation's _plugins_ folder. Restart XL Deploy to enable the plugin.
 
 # Configuration
 

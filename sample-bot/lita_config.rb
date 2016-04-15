@@ -36,5 +36,10 @@ Lita.configure do |config|
   config.handlers.xl_deploy.xld_password = "admin1"
   config.handlers.xl_deploy.context_storage_timeout = "3600"
 
+  config.handlers.xl_release.xlr_url = "http://localhost:5516"
+  config.handlers.xl_release.xlr_username = "admin"
+  config.handlers.xl_release.xlr_password = "admin1"
+  config.handlers.xl_release.context_storage_timeout = "3600"
+
 end
 

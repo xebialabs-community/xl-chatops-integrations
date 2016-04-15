@@ -22,8 +22,8 @@ To run the bot, you need to install [Lita](https://docs.lita.io/getting-started/
 
 * Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
 * Ruby development libraries and header files
-* gcc and make
 * Redis, version 2.6 or greater
+* gcc and make
 
 ## Installing Ruby 2.0
 
@@ -39,6 +39,12 @@ sudo apt-get install ruby2.0 ruby2.0-dev
 
 ```
 sudo apt-get install redis-server
+```
+
+## Installing gcc and make
+
+```
+sudo apt-get install gcc make
 ```
 
 ## Installing Lita

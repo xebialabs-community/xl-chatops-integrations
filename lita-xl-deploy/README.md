@@ -4,7 +4,7 @@ Using this handler, you can make XL Deploy an active part of your DevOps communi
 
 # Prerequisites
 
-See the [top level README](../README.md) for prerequisites.
+See the [top level README](../README.md#prerequisites) for prerequisites.
 
 # Quick start
 

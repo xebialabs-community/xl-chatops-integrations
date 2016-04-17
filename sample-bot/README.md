@@ -57,7 +57,7 @@ You can also check the available environments:
 
 If this works, your connection to XL Deploy is configured correctly.
 
-See the [usage documentation](https://github.com/mpvvliet/xl-chatops-integrations/tree/master/lita-xl-deploy#usage) for more information on what the bot can do.
+See the [usage documentation](https://github.com/mpvvliet/xl-chatops-integrations/tree/master/lita-xl-deploy#chatting-with-xl-deploy) for more information on what the bot can do.
 
 # Connecting to HipChat
 

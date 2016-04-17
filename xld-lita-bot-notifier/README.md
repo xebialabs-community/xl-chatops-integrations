@@ -4,11 +4,13 @@ This is an [XL Deploy](https://www.xebialabs.com/products/xl-deploy) plugin that
 
 See the [top level README](../README.md#prerequisites) for general prerequisites.
 
-The notifier requires the following libraries in the XL Deploy `lib` folder:
+The notifier requires the following libraries in XL Deploy:
 
 * httpasyncclient-4.0.2.jar
 * unirest-java-1.4.7.jar
 * httpcore-nio-4.4.3.jar
+
+(these files are included in this repository in the [lib](lib) folder)
 
 The notifier has been tested with XL Deploy 5.1.x.
 

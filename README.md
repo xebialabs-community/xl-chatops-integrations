@@ -25,6 +25,8 @@ To run the bot, you need to install [Lita](https://docs.lita.io/getting-started/
 * Redis, version 2.6 or greater
 * gcc and make
 
+# Installation
+
 ## Installing Ruby 2.0
 
 If your environment does not have Ruby 2.0 installed (for instance on Ubuntu 14), you can install it using the following commands:
@@ -57,7 +59,7 @@ sudo gem install lita
 
 # Quick start
 
-The [sample-bot](sample-bot) project is the easiest way to get a bot up and running.
+Once you have the prerequisites installed, use the [sample-bot](sample-bot) project to quickly get a bot up and running.
 
 # Feedback
 

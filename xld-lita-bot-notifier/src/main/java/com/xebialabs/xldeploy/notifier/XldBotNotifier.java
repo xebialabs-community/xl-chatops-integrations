@@ -90,13 +90,12 @@ public class XldBotNotifier implements ExecutionStateListener {
 
 	@Override
 	public void stepStateChanged(StepExecutionStateEvent event) {
-		LOG.debug("Task " + event.task().getId() + " step state changed, pushing event to bot URL " + botURL);
-		postNotification(event.task().getId(), event.currentState().toString());
+		// Don't post step state changes
 	}
 
 	@Override
 	public void taskStateChanged(TaskExecutionStateEvent event) {
 		LOG.debug("Task " + event.task().getId() + " state changed, pushing event to bot URL " + botURL);
-		postNotification(event.task().getId(), event.currentState().toString());
+		postNotification(event.task().getId(), event.currentState().toString().toLowerCase());
 	}
 }

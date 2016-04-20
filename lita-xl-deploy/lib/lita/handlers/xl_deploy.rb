@@ -85,7 +85,7 @@ module Lita
             help: { 'archive [task id]' => 'Archive a task' }
         )
 
-		route(/^log\s?([a-z0-9]{5})?$/i,
+		route(/^log\s?([a-z0-9]{5})?\s?([0-9]+)?$/i,
             :log_task,
             command: false,
             help: { 'log [task id]' => 'Show a task log' }
@@ -117,7 +117,7 @@ module Lita
 			botId = get_or_create_bot_id(taskId, false)
 			if botId != nil
 				rooms = get_room_list_for_task_id(botId)
-				rooms.each { |room| robot.send_message(Source.new(room: room), "[#{botId}] #{payload[:task_status]}") }
+				rooms.each { |room| robot.send_message(Source.new(room: room), "[#{botId}] status: #{payload[:task_status]}") }
 			end
 		end
 
@@ -189,7 +189,7 @@ module Lita
 		end
 
 		def print_task(botId, task)
-			"- [" + task["@state"] + "] " + task["metadata"]["application"]["$"] + "/" + task["metadata"]["version"]["$"] + " to " + task["metadata"]["environment"]["$"] + " [" + botId + "] "
+			"- [" + task["@state2"] + "] " + task["metadata"]["application"]["$"] + "/" + task["metadata"]["version"]["$"] + " to " + task["metadata"]["environment"]["$"] + " [" + botId + "] "
 		end
 
 		def update_room_task_id(room, taskId)
@@ -309,15 +309,22 @@ module Lita
 			result
 		end
 
-		def show_log_tail(response, http, botId)
+		def show_log_tail(response, http, botId, lines = 20)
 			taskId = get_task_id(botId)
 
 			log = xld_rest_api(http).get_current_step_log(taskId)
 			loglines = log.split("\n")
 
-			# Print last 20 lines
-			if loglines.length > 20
-				loglines = loglines.slice(loglines.length - 20)
+			# Print last X lines
+			if lines == nil
+				lines = 20
+			end
+
+			lines = Integer(lines)
+
+			if loglines.length > lines
+				loglines = loglines.slice(-lines, lines)
+				response.reply "(last #{lines} lines)"
 			end
 			loglines.each { |x| response.reply botId + "> " + x }
 		end
@@ -605,7 +612,7 @@ module Lita
 
 			  	set_conversation_context(response.message, "currentTaskBotId", botId.value)
 			  	response.reply "Showing log of task " + botId.value
-			  	show_log_tail(response, http, botId.value)
+			  	show_log_tail(response, http, botId.value, response.match_data[2])
 			}
 		end
 

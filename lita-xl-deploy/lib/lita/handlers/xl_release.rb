@@ -1,3 +1,5 @@
+require 'multi_json'
+
 require_relative './xld_parameter'
 require_relative './xld_id'
 require_relative './xlr_rest'
@@ -21,7 +23,7 @@ module Lita
 		#########
       	# Events
       	on :loaded, :handler_loaded
-      	on :task_status, :handle_task_status_update
+      	on :release_status, :handle_release_status_update
 
 		#########
       	# Routes
@@ -31,26 +33,56 @@ module Lita
             help: { 'releases' => 'List all current releases' }
         )
 
+		route(/^complete\s?([a-z0-9]{5})?$/i,
+            :complete_task,
+            command: false,
+            help: { 'complete [task id]' => 'Complete a task' }
+        )
+
+		http.post "/activity", :receive_release_status
+
 		##########################
       	# Event Handlers
 		def handler_loaded(payload)
 			log.debug('XlRelease handler loaded')
 		end
 
-		def handle_task_status_update(payload)
-			log.debug('Received task status update')
-			taskStatus = payload[:task_status]
-
-			return if 
-				taskStatus == "CANCELLING" ||
-				taskStatus == "QUEUED"
-
-			taskId = payload[:task_id]
-			botId = get_or_create_bot_id(taskId, false)
-			if botId != nil
-				rooms = get_room_list_for_task_id(botId)
-				rooms.each { |room| robot.send_message(Source.new(room: room), "[#{botId}] #{payload[:task_status]}") }
+		def handle_release_status_update(payload)
+			log.debug('Received release status update')
+			payload[:activity_id] =~ /\/(Release[0-9]+)\//
+			releaseId = get_or_create_bot_id($1, false)
+			if releaseId == nil
+				print "Release not found for id #{$1}"
+				return
 			end
+
+			type = payload[:activity_type]
+			message = payload[:activity_message]
+			taskId = get_or_create_bot_id(payload[:activity_task_id])
+
+			if type == "TASK_OWNER_UPDATED"
+				message =~ /^.*Task '([^']+)'.*to '?([^']+)'?$/
+				taskName = $1
+				owner = $2
+
+				print "[#{releaseId}] Task '#{taskName}' owner changed to '#{owner}' [#{taskId}]"
+			elsif type == "TASK_TASK_TEAM_UPDATED"
+				message =~ /^.*Task '([^']+)'.*to '?([^']+)'?$/
+				taskName = $1
+				owner = $2
+
+				print "[#{releaseId}] Task '#{taskName}' team changed to '#{owner}' [#{taskId}]"
+			elsif type == "TASK_STARTED"
+				message =~ /^.*Task '([^']+)'$/
+				taskName = $1
+
+				print "[#{releaseId}] Task '#{taskName}' started [#{taskId}]"
+			end
+
+			# if botId != nil
+			# 	rooms = get_room_list_for_task_id(botId)
+			# 	rooms.each { |room| robot.send_message(Source.new(room: room), "[#{botId}] #{payload[:task_status]}") }
+			# end
 		end
 
 		#########
@@ -85,7 +117,7 @@ module Lita
 			result = XldParameter.new("task")
 
 			if botId == nil
-				result.value = get_conversation_context(message, "currentTaskBotId")
+				result.value = get_conversation_context(message, "currentXlrTaskBotId")
 				result.defaulted = true
 			else
 				result.value = botId
@@ -121,7 +153,7 @@ module Lita
 		end
 
 		def print_release(botId, rel)
-			"- " + rel["title"] + " [" + botId + "] (phase: " + rel["currentPhase"] + ", task: " + rel["currentTask"]["title"] + ")"
+			"- " + rel["title"] + " (phase: " + rel["currentPhase"] + ", task: " + rel["currentTask"]["title"] + " [" + get_or_create_bot_id(rel["currentTask"]["id"]) + "]" + ")" + " [" + botId + "]"
 		end
 
 		def update_room_task_id(room, taskId)
@@ -146,9 +178,22 @@ module Lita
 
 		def register_new_task(response, taskId)
 			newBotId = get_or_create_bot_id(taskId)
-			set_conversation_context(response.message, "currentTaskBotId", newBotId)
+			set_conversation_context(response.message, "currentXlrTaskBotId", newBotId)
 			update_room_task_id(response.message.room_object, newBotId)
 			newBotId
+		end
+
+		def output_default_message(response, param1, param2 = nil, param3 = nil)
+			defaultedMessage = ""
+			[ param1, param2, param3].map { |x| 
+				if x != nil && x.defaulted
+					defaultedMessage = defaultedMessage + " " + x.name + " " + x.value
+				end
+			}
+
+			if defaultedMessage != ""
+				response.reply "(using" + defaultedMessage + ")"
+			end
 		end
 
 		#########
@@ -174,7 +219,7 @@ module Lita
 						end
 
 						# message = response.message
-						# clear_conversation_context(message, "currentTaskBotId")
+						# clear_conversation_context(message, "currentXlrTaskBotId")
 						# clear_conversation_context(message, "currentApplicationId")
 						# clear_conversation_context(message, "currentVersionId")
 						# clear_conversation_context(message, "currentEnvironmentId")
@@ -182,6 +227,28 @@ module Lita
 					end
 				end
 			}
+		end
+
+		def complete_task(response)
+			execute_with_error_reply(response) {
+				botId = determine_command_bot_id(response.message, response.match_data[1])
+
+				output_default_message(response, botId)
+
+			  	taskId = get_task_id(botId.value)
+
+			  	response.reply "Completing task [#{botId.value}]"
+
+			  	xlr_rest_api(http).complete_task(taskId)
+			}
+		end
+
+		#########
+      	# HTTP route handlers
+
+		def receive_release_status(request, response)
+		  body = MultiJson.load(request.body)
+		  robot.trigger(:release_status, activity_id: body["id"], activity_type: body["type"], activity_message: body["message"], activity_task_id: body["taskId"])
 		end
 
 		Lita.register_handler(self)

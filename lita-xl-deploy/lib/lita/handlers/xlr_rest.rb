@@ -41,6 +41,11 @@ module Lita
         MultiJson.load(http_response.body)
       end
 
+      def complete_task(taskId, comment = "Complete")
+        http_response = execute_post("/api/v1/tasks/#{taskId}/complete", "{ \"comment\": \"#{comment}\" }")
+        MultiJson.load(http_response.body)
+      end
+
       def is_error(http_response)
         http_response.status < 200 || http_response.status > 299
       end

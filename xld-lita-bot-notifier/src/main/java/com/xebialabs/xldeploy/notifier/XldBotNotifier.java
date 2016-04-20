@@ -45,61 +45,58 @@ public class XldBotNotifier implements ExecutionStateListener {
 	}
 	
 	@Subscribe
-	public void log(TaskStartedEvent event) throws UnirestException {
+	public void log(TaskStartedEvent event) {
 		postNotification(event.getTaskId(), "started");
 	}
 
 	@Subscribe
-	public void log(TaskStoppedEvent event) throws UnirestException {
+	public void log(TaskStoppedEvent event) {
 		postNotification(event.getTaskId(), "stopped");
 	}
 
 	@Subscribe
-	public void log(TaskCancelledEvent event) throws UnirestException {
+	public void log(TaskCancelledEvent event) {
 		postNotification(event.getTaskId(), "cancelled");
 	}
 	
 	@Subscribe
-	public void log(TaskAbortedEvent event) throws UnirestException {
+	public void log(TaskAbortedEvent event) {
 		postNotification(event.getTaskId(), "aborted");
 	}
 	
 	@Subscribe
-	public void log(TaskArchivedEvent event) throws UnirestException {
+	public void log(TaskArchivedEvent event) {
 		postNotification(event.getTaskId(), "archived");
 	}
 	
 	@Subscribe
-	public void log(TaskScheduledEvent event) throws UnirestException {
+	public void log(TaskScheduledEvent event) {
 		postNotification(event.getTaskId(), "scheduled");
 	}
 	
-	private void postNotification(String taskId, String status) throws UnirestException {
-		HttpResponse<String> jsonResponse = Unirest.post(botURL + "/task/" + taskId + "/" + status)
-				  .header("Content-type", "application/json")
-				  .asString();
-		if (jsonResponse.getStatus() != 200) {
-			LOG.debug("Failed to push event to bot, status code " + jsonResponse.getStatusText());
+	private void postNotification(String taskId, String status) {
+		try {
+			HttpResponse<String> jsonResponse = Unirest.post(botURL + "/task/" + taskId + "/" + status)
+					  .header("Content-type", "application/json")
+					  .asString();
+			if (jsonResponse.getStatus() != 200) {
+				LOG.debug("Failed to push event to bot, status code " + jsonResponse.getStatusText());
+			}
+		} catch (UnirestException e) {
+			// fail silently
+			LOG.debug("Failed to push event to bot", e);
 		}
 	}
 
 	@Override
 	public void stepStateChanged(StepExecutionStateEvent event) {
-		try {
-			LOG.debug("Task " + event.task().getId() + " step state changed, pushing event to bot URL " + botURL);
-			postNotification(event.task().getId(), event.currentState().toString());
-		} catch (UnirestException e) {
-			// Silently fail
-		}
+		LOG.debug("Task " + event.task().getId() + " step state changed, pushing event to bot URL " + botURL);
+		postNotification(event.task().getId(), event.currentState().toString());
 	}
 
 	@Override
 	public void taskStateChanged(TaskExecutionStateEvent event) {
-		try {
-			LOG.debug("Task " + event.task().getId() + " state changed, pushing event to bot URL " + botURL);
-			postNotification(event.task().getId(), event.currentState().toString());
-		} catch (UnirestException e) {
-			// Silently fail
-		}
+		LOG.debug("Task " + event.task().getId() + " state changed, pushing event to bot URL " + botURL);
+		postNotification(event.task().getId(), event.currentState().toString());
 	}
 }

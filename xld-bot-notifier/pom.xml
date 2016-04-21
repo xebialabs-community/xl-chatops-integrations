@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.xebialabs.xldeploy.notifier</groupId>
-  <artifactId>xld-lita-bot-notifier</artifactId>
+  <artifactId>xld-bot-notifier</artifactId>
   <packaging>jar</packaging>
   <version>1.2-SNAPSHOT</version>
-  <name>xld-lita-bot-notifier</name>
+  <name>xld-bot-notifier</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>

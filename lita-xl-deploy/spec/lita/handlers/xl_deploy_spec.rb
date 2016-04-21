@@ -90,7 +90,7 @@ describe Lita::Handlers::XlDeploy, lita_handler: true do
 
 			response = double("response")
 			expect(response).to receive(:reply).with("List of deployments:")
-			expect(response).to receive(:reply).with(/\[STOPPED\] PetClinic-war\/1\.0 to TEST/)
+			expect(response).to receive(:reply).with(/\[FAILED\] PetClinic-war\/1\.0 to TEST/)
 			
 			message = double("message")
 			expect(response).to receive(:message).at_least(:once).and_return(message)

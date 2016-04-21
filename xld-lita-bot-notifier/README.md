@@ -10,19 +10,19 @@ The notifier requires the following libraries in XL Deploy:
 * unirest-java-1.4.7.jar
 * httpcore-nio-4.4.3.jar
 
-(these files are included in this repository in the [lib](lib) folder)
+These files are included in the [lib](lib) folder of this repository.
 
 The notifier has been tested with XL Deploy 5.1.x.
 
 # Installation
 
-Install the libraries from this project's `lib` folder into your XL Deploy installation's `lib` folder:
+Install the libraries from this project's `lib` folder in your XL Deploy installation's `lib` folder:
 
 ```
 cp lib/*.jar /path/to/xl-deploy/lib
 ```
 
-Next, install the notifier as a regular plugin by copying the JAR file into the XL Deploy installation's _plugins_ folder. Restart XL Deploy to enable the plugin.
+Next, install the notifier as a regular plugin by copying the JAR file in the XL Deploy installation's _plugins_ folder. Restart XL Deploy to enable the plugin.
 
 # Configuration
 

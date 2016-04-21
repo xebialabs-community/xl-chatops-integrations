@@ -154,6 +154,24 @@ end
 ## Usage
 
 ```
+ [You] Lita help
+[Lita] Lita: help - Lists help information for terms and command the robot will respond to.
+       Lita: help COMMAND - Lists help information for terms or commands that begin with COMMAND.
+       Lita: info - Replies with the current version of Lita.
+       Lita: users find SEARCH_TERM - Find a Lita user by ID, name, or mention name.
+       deployments - List all current deployments
+       environments - List all environments
+       applications - List all applications
+       versions - List all application versions
+       deploy [application] [version] to [environment] - Start a new deployment
+       rollback [task id] - Rollback a task
+       start [task id] - Start a task
+       abort [task id] - Abort a task
+       cancel [task id] - Cancel a task
+       archive [task id] - Archive a task
+       log [task id] - Show a task log
+       desc [task id] - Describe a task
+
  [You] applications
 [Lita] List of applications:
        - Applications/PetClinic-ear

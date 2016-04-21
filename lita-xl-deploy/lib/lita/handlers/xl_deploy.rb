@@ -46,7 +46,7 @@ module Lita
 		route(/^versions(\s([a-z][^\s]+))?$/i,
             :list_versions,
             command: false,
-            help: { 'versions' => 'List all application versions' }
+            help: { 'versions [application]' => 'List all application versions' }
         )
 
 		route(/^deploy(\s([a-z][^\s]+))?(\s([0-9][^\s]+))?(\sto\s([a-z]+))?$/i,

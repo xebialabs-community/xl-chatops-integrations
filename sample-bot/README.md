@@ -12,7 +12,7 @@ bundle
 
 # Configure the bot
 
-Before running the bot, you'll need to tell it where your XL Deploy instance is located. Open the [lita_config.rb](lita_config.rb) file and enter the URL, username and password of your XL Deploy instance.
+Before running the bot, you must tell it where your XL Deploy instance is located. Open the [lita_config.rb](lita_config.rb) file and enter the URL of your XL Deploy instance and the user name and password to use when connecting.
 
 These sample values are included in the file:
 
@@ -30,11 +30,11 @@ Start the bot with the command:
 lita
 ```
 
-This should boot Lita and instantiate the bot. You'll be able to communicate with the bot via the command line.
+This will boot Lita and instantiate the bot. You can communicate with the bot via the command line.
 
 # First steps
 
-Once the bot is running, you can start testing the connection to XL Deploy by looking at the installed applications:
+After the bot is running, you can start testing the connection to XL Deploy by looking at the installed applications:
 
 ```
  [You] applications
@@ -44,7 +44,7 @@ Once the bot is running, you can start testing the connection to XL Deploy by lo
        - Applications/PetZoo
 ```
 
-Note that the bot accesses XL Deploy as the user configured in the configuration file and is only able to see those application that are accessible to the user.
+Note that the bot accesses XL Deploy as the user that is configured in the configuration file. The bot can only see the applications that are accessible to that user.
 
 You can also check the available environments:
 
@@ -57,11 +57,11 @@ You can also check the available environments:
 
 If this works, your connection to XL Deploy is configured correctly.
 
-See the [usage documentation](https://github.com/mpvvliet/xl-chatops-integrations/tree/master/lita-xl-deploy#chatting-with-xl-deploy) for more information on what the bot can do.
+See the [usage documentation](../lita-xl-deploy#chatting-with-xl-deploy) for more information about what the bot can do.
 
 # Connecting to HipChat
 
-If you want to connect your bot to HipChat, change the [lita_config.rb](lita_config.rb) by including the _hipchat_ adapter:
+If you want to connect your bot to HipChat, change [lita_config.rb](lita_config.rb) by including the _hipchat_ adapter:
 
 ```
   config.robot.adapter = :hipchat
@@ -71,4 +71,4 @@ If you want to connect your bot to HipChat, change the [lita_config.rb](lita_con
   config.adapters.hipchat.rooms = [ "123456_sandbox" ]
 ```
 
-Uncomment the line to include the lita-hipchat gem in the [Gemfile](Gemfile), ensure the gem is installed and restart the bot.
+Uncomment the line to include the lita-hipchat gem in the [Gemfile](Gemfile), ensure the gem is installed, and restart the bot.

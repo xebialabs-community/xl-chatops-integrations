@@ -1,6 +1,6 @@
 This is a handler for the [Lita](https://www.lita.io/) bot framework that connects to [XL Deploy](https://xebialabs.com/products/xl-deploy/).
 
-Using this handler, you can make XL Deploy an active part of your DevOps communication. Include XL Deploy in your chat room and collaborate with your team on planning, performing and troubleshooting deployments.
+Using this handler, you can make XL Deploy an active part of your DevOps communication. Include XL Deploy in your chat room and collaborate with your team on planning, performing, and troubleshooting deployments.
 
 # Prerequisites
 
@@ -8,7 +8,7 @@ See the [top level README](../README.md#prerequisites) for prerequisites.
 
 # Quick start
 
-See the [sample-bot](../sample-bot) project for an easy-to-use, complete Lita bot setup.
+See the [sample-bot](../sample-bot) project for a complete and easy-to-use Lita bot setup.
 
 # Features
 
@@ -23,19 +23,19 @@ The bot makes it possible to "chat" with XL Deploy. The following interactions a
 
 ## Connecting to XL Deploy
 
-The bot connects to XL Deploy using a URL / username / password combination configured in the `lita_config.rb` file. The bot interacts with XL Deploy as this user and has all permissions associated with the user. For instance, if you configure the bot to connect as an admin user to XL Deploy, then everyone in the chat room has the ability to start deployments as the admin user.
+The bot connects to XL Deploy using a combination of a URL, user name, and password, all configured in the `lita_config.rb` file. The bot interacts with XL Deploy as this user and has all permissions associated with the user. For example, if you configure the bot to connect to XL Deploy as the admin user, then everyone in the chat room will be able to start deployments as the admin user.
 
-We recommend you configure the bot with a user with restricted permissions to prevent unintentional privilige escalation.
+We recommend you configure the bot to use a user with restricted permissions to prevent unintentional privilege escalation.
 
-## Task ids
+## Task IDs
 
-Tasks in XL Deploy are referred to using GUIDS, globally unique identifiers. These ids are long and cumbersome to use when communicating via a chat tool.
+In XL Deploy, tasks are referred to using globally unique identifiers (GUIDS). These IDs are long and cumbersome to use when communicating via a chat tool.
 
-The bot generates unique, 5 character ids for each task GUID it encounters. These short ids are used to communicate about tasks with the chat room members. Each short id is remembered during the configured context storage period configured via configuration option `context_storage_timeout`. After this timeout expires, the short id is purged from storage and no longer accessible. The bot will generate a new short id the next time it encounters the task GUID.
+The bot generates a unique, five-character ID for each task GUID it encounters. These short IDs are used to communicate with chat room members about tasks. Each short id is remembered during the context storage period set in the `context_storage_timeout` configuration option. After this timeout expires, the short ID is purged from storage and is no longer accessible. The bot will generate a new short ID the next time it encounters the task GUID.
 
 ## Conversation context
 
-The bot keeps track of the conversation it has with a user in a particular room. Specifically, the bot remembers the latest task, application, version and environment that have been mentioned by a user. This makes the following interaction possible:
+The bot keeps track of the conversation it has with a user in a particular room. Specifically, the bot remembers the latest task, application, version, and environment that a user mentioned. This makes the following interaction possible:
 
 ```
 [You] deployments
@@ -57,13 +57,13 @@ The bot keeps track of the conversation it has with a user in a particular room.
 
 ```
 
-Note that the bot inferred the user was talking about task `fd5hr` when he gave the `start` command.
+Note that the bot inferred the user was talking about task `fd5hr` when giving the `start` command.
 
-Whenever a user lists available applications, environments, versions or deployments, the conversation context for that user in that room is reset.
+When a user lists available applications, environments, versions, or deployments, the conversation context for that user in that room is reset.
 
 ## Starting deployments
 
-To start a deployment, the following command can be used:
+To start a deployment, use the following command:
 
 ```
  [You] deploy war 1.0 to test
@@ -72,7 +72,7 @@ To start a deployment, the following command can be used:
 
 The bot will search for each of the components of the command in XL Deploy. In the above example, the bot will search for an application called `%war%`. If found, it will search for a version `%1.0%` of the same application. Finally, it will search for an environment named `%test%`.
 
-If multiple matches are found, the bot will log a comment such as the following:
+If multiple matches are found, the bot will show a comment such as the following:
 
 ```
   [You] deploy pet
@@ -94,10 +94,10 @@ If you omit any of the components, the bot will attempt to retrieve the values f
 
 ### Required attributes
 
-* `xld_url` (String) - The URL to your XL Deploy instance. Default: `nil`.
-* `xld_username` (String) - The username to connecto to your XL Deploy instance. Default: `nil`.
-* `xld_password` (String) - The password to connect to your XL Deploy instance. Default: `nil`.
-* `context_storage_timeout` (int) - The duration for which to keep conversation context, in seconds. Default: `nil`.
+* `xld_url` (String): The URL of your XL Deploy instance. Default: `nil`.
+* `xld_username` (String): The user name to use when connecting to your XL Deploy instance. Default: `nil`.
+* `xld_password` (String): The password to use when connecting to your XL Deploy instance. Default: `nil`.
+* `context_storage_timeout` (int): The duration for which to keep conversation context, in seconds. Default: `nil`.
 
 ### Optional attributes
 
@@ -185,7 +185,7 @@ end
 [Lita] (using task fd5hr)
        Starting task fd5hr
        [fd5hr] started
- 
+
  [You] deploy war 1.0 to test
 [Lita] Starting deployment of PetClinic-war-1.0 to TEST [i6tj7]
 ```

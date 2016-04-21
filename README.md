@@ -2,23 +2,23 @@ This repository contains a bot to integrate [XebiaLabs](https://www.xebialabs.co
 
 # Introduction
 
-Collaboration & team work are two of the cornerstones of how we work at XebiaLabs. Being a distributed team, this means using a chat tool to discuss and keep your team members up-to-date. More and more, we have been including our tools in the chat room as well -- JIRA, Zendesk, PagerDuty... as well as our own tools of course!
+Collaboration and teamwork are two of the cornerstones of how we work at XebiaLabs. Being a distributed team, this means using a chat tool to discuss and keep team members up-to-date. More and more, we have been including our tools in the chat room as well -- JIRA, Zendesk, PagerDuty, and, of course, our own products!
 
 We've written an internal bot to connect XL Deploy to our chat room. This bot, based on the [Lita](http://www.lita.io) framework, allows communication to and from XL Deploy.
 
-The source code is published here for you to try out. Give it a shot & let us know what you think!
+The source code is published here for you to try out. Give it a shot and let us know what you think!
 
 # Contents
 
-This repository contains the following:
+This repository contains:
 
-* [lita-xl-deploy](lita-xl-deploy): a handler to communicate with [XL Deploy](https://www.xebialabs.com/products/xl-deploy) from your chat room, written for the [Lita](http://www.lita.io) bot framework
-* [xld-lita-bot-notifier](xld-lita-bot-notifier): a plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information out to the bot
-* [sample-bot](sample-bot): a sample bot configuration
+* [lita-xl-deploy](lita-xl-deploy): A handler to communicate with [XL Deploy](https://www.xebialabs.com/products/xl-deploy) from your chat room, written for the [Lita](http://www.lita.io) bot framework
+* [xld-lita-bot-notifier](xld-lita-bot-notifier): A plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information to the bot
+* [sample-bot](sample-bot): A sample bot configuration
 
 # Prerequisites
 
-To run the bot, you need to install [Lita](https://docs.lita.io/getting-started/). Lita requires the following dependencies:
+To run the bot, you need to install [Lita](https://docs.lita.io/getting-started/). Lita requires:
 
 * Ruby, version 2.0 or greater (JRuby 9.0.0.0+ or Rubinius 2+ also work)
 * Ruby development libraries and header files
@@ -29,7 +29,7 @@ To run the bot, you need to install [Lita](https://docs.lita.io/getting-started/
 
 ## Installing Ruby 2.0
 
-If your environment does not have Ruby 2.0 installed (for instance on Ubuntu 14), you can install it using the following commands:
+If your environment does not have Ruby 2.0 installed (for instance, Ubuntu 14), you can install it using the following commands:
 
 ```
 sudo apt-add-repository ppa:brightbox/ruby-ng
@@ -59,7 +59,7 @@ sudo gem install lita
 
 # Quick start
 
-Once you have the prerequisites installed, use the [sample-bot](sample-bot) project to quickly get a bot up and running.
+After you have installed the prerequisites, use the [sample-bot](sample-bot) project to quickly get a bot up and running.
 
 # Feedback
 

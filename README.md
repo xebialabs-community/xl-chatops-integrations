@@ -12,10 +12,10 @@ The source code is published here for you to try out. Give it a shot and let us 
 
 In order to get started with the bot, follow these steps:
 
-1. [Install](README.md#Installation) the prerequisites for the bot.
+1. [Install](README.md#installation) the prerequisites for the bot.
 2. Check out and configure the [sample bot](sample-bot) to connect to XL Deploy and start playing around locally.
 3. Install the [XLD bot notifier](xld-lita-bot-notifier) plugin in XL Deploy to notify the bot (and your chat room) of deployment status changes.
-4. Connect the bot to your chat tool of choice, for instance [HipChat](sample-bot/README.md#Connecting to HipChat) or [Slack](sample-bot/README.md#Connecting to Slack).
+4. Connect the bot to your chat tool of choice, for instance [HipChat](sample-bot/README.md#connecting-to-hipchat) or [Slack](sample-bot/README.md#connecting-to-slack).
 
 # Contents
 

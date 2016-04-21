@@ -14,7 +14,7 @@ In order to get started with the bot, follow these steps:
 
 1. [Install](README.md#installation) the prerequisites for the bot.
 2. Check out and configure the [sample bot](sample-bot) to connect to XL Deploy and start playing around locally.
-3. Install the [XLD bot notifier](xld-lita-bot-notifier) plugin in XL Deploy to notify the bot (and your chat room) of deployment status changes.
+3. Install the [XLD bot notifier](xld-bot-notifier) plugin in XL Deploy to notify the bot (and your chat room) of deployment status changes.
 4. Connect the bot to your chat tool of choice, for instance [HipChat](sample-bot/README.md#connecting-to-hipchat) or [Slack](sample-bot/README.md#connecting-to-slack).
 
 # Contents
@@ -22,7 +22,7 @@ In order to get started with the bot, follow these steps:
 This repository contains:
 
 * [lita-xl-deploy](lita-xl-deploy): A handler to communicate with [XL Deploy](https://www.xebialabs.com/products/xl-deploy) from your chat room, written for the [Lita](http://www.lita.io) bot framework
-* [xld-lita-bot-notifier](xld-lita-bot-notifier): A plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information to the bot
+* [xld-bot-notifier](xld-bot-notifier): A plugin for [XL Deploy](https://www.xebialabs.com/products/xl-deploy) that pushes status information to the bot
 * [sample-bot](sample-bot): A sample bot configuration
 
 # Prerequisites

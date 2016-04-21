@@ -90,20 +90,50 @@ If you omit any of the components, the bot will attempt to retrieve the values f
         ...
 ```
 
-## Configuration
+## Notifications
 
-### Required attributes
+The bot can respond to notifications about deployments taking place in XL Deploy via the [XL Deploy bot notifier](../xld-bot-notifier). When the bot receives a notification, it will determine in which room(s) to print the notification. To do this, the bot keeps track of which deployments are listed in which room, for instance via the `deployments` command. If a deployment was listed in a room, notifications for that task are also printed to the room.
+
+Notifcations for new deployments that have not yet been accessed by the bot are ignored.
+
+## Getting help
+
+The bot will respond to the `help` command when prefixed by it's name:
+
+```
+ [You] Lita help
+[Lita] Lita: help - Lists help information for terms and command the robot will respond to.
+       Lita: help COMMAND - Lists help information for terms or commands that begin with COMMAND.
+       Lita: info - Replies with the current version of Lita.
+       Lita: users find SEARCH_TERM - Find a Lita user by ID, name, or mention name.
+       deployments - List all current deployments
+       environments - List all environments
+       applications - List all applications
+       versions - List all application versions
+       deploy [application] [version] to [environment] - Start a new deployment
+       rollback [task id] - Rollback a task
+       start [task id] - Start a task
+       abort [task id] - Abort a task
+       cancel [task id] - Cancel a task
+       archive [task id] - Archive a task
+       log [task id] - Show a task log
+       desc [task id] - Describe a task
+```
+
+# Configuration
+
+## Required attributes
 
 * `xld_url` (String): The URL of your XL Deploy instance. Default: `nil`.
 * `xld_username` (String): The user name to use when connecting to your XL Deploy instance. Default: `nil`.
 * `xld_password` (String): The password to use when connecting to your XL Deploy instance. Default: `nil`.
 * `context_storage_timeout` (int): The duration for which to keep conversation context, in seconds. Default: `nil`.
 
-### Optional attributes
+## Optional attributes
 
 None.
 
-### Example
+## Example
 
 ``` ruby
 Lita.configure do |config|
@@ -151,27 +181,9 @@ Lita.configure do |config|
 end
 ```
 
-## Usage
+# Usage
 
 ```
- [You] Lita help
-[Lita] Lita: help - Lists help information for terms and command the robot will respond to.
-       Lita: help COMMAND - Lists help information for terms or commands that begin with COMMAND.
-       Lita: info - Replies with the current version of Lita.
-       Lita: users find SEARCH_TERM - Find a Lita user by ID, name, or mention name.
-       deployments - List all current deployments
-       environments - List all environments
-       applications - List all applications
-       versions - List all application versions
-       deploy [application] [version] to [environment] - Start a new deployment
-       rollback [task id] - Rollback a task
-       start [task id] - Start a task
-       abort [task id] - Abort a task
-       cancel [task id] - Cancel a task
-       archive [task id] - Archive a task
-       log [task id] - Show a task log
-       desc [task id] - Describe a task
-
  [You] applications
 [Lita] List of applications:
        - Applications/PetClinic-ear

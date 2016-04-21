@@ -71,4 +71,24 @@ If you want to connect your bot to HipChat, change [lita_config.rb](lita_config.
   config.adapters.hipchat.rooms = [ "123456_sandbox" ]
 ```
 
-Uncomment the line to include the lita-hipchat gem in the [Gemfile](Gemfile), ensure the gem is installed, and restart the bot.
+Uncomment the line to include the `lita-hipchat` gem in the [Gemfile](Gemfile), ensure the gem is installed, and restart the bot.
+
+# Connecting to Slack
+
+If you want to connect your bot to Slack, change [lita_config.rb](lita_config.rb) by including the _slack_ adapter:
+
+```
+Lita.configure do |config|
+  config.robot.adapter = :slack
+  config.robot.admins = ["U012A3BCD"]
+
+  config.adapters.slack.token = "abcd-1234567890-hWYd21AmMH2UHAkx29vb5c1Y"
+
+  config.adapters.slack.link_names = true
+  config.adapters.slack.parse = "full"
+  config.adapters.slack.unfurl_links = false
+  config.adapters.slack.unfurl_media = false
+end
+```
+
+Uncomment the line to include the `lita-hipchat` gem in the [Gemfile](Gemfile), ensure the gem is installed, and restart the bot.

@@ -8,6 +8,15 @@ We've written an internal bot to connect XL Deploy to our chat room. This bot, b
 
 The source code is published here for you to try out. Give it a shot and let us know what you think!
 
+# Quick start
+
+In order to get started with the bot, follow these steps:
+
+1. [Install](#Installation) the prerequisites for the bot.
+2. Check out and configure the [sample bot](sample-bot) to connect to XL Deploy and start playing around locally.
+3. Install the [XLD bot notifier](xld-lita-bot-notifier) plugin in XL Deploy to notify the bot (and your chat room) of deployment status changes.
+4. Connect the bot to your chat tool of choice, for instance [HipChat](sample-bot/README.md#Connecting to HipChat) or [Slack](sample-bot/README.md#Connecting to Slack).
+
 # Contents
 
 This repository contains:
@@ -56,10 +65,6 @@ Lita itself is installed as follows:
 ```
 sudo gem install lita
 ```
-
-# Quick start
-
-After you have installed the prerequisites, use the [sample-bot](sample-bot) project to quickly get a bot up and running.
 
 # Feedback
 

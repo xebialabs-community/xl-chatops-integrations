@@ -4,7 +4,7 @@ Lita.load_locales Dir[File.expand_path(
   File.join("..", "..", "locales", "*.yml"), __FILE__
 )]
 
-require "lita/handlers/xl_deploy"
+require "lita/handlers/xl_release"
 
 Lita::Handlers::XlDeploy.template_root File.expand_path(
   File.join("..", "..", "templates"),

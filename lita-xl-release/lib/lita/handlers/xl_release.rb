@@ -1,10 +1,9 @@
 require 'multi_json'
 
-require_relative './xld_parameter'
-require_relative './xld_id'
+require_relative '../../../../lita-shared/lib/lita/shared/xl_parameter'
+require_relative '../../../../lita-shared/lib/lita/shared/context'
+require_relative '../../../../lita-shared/lib/lita/shared/bot_error'
 require_relative './xlr_rest'
-require_relative './bot_error'
-require_relative './http_error'
 
 #########
 # 
@@ -29,13 +28,13 @@ module Lita
       	# Routes
 		route(/^releases$/i,
             :list_releases,
-            command: false,
+            command: true,
             help: { 'releases' => 'List all current releases' }
         )
 
 		route(/^complete\s?([a-z0-9]{5})?$/i,
             :complete_task,
-            command: false,
+            command: true,
             help: { 'complete [task id]' => 'Complete a task' }
         )
 
@@ -58,7 +57,12 @@ module Lita
 
 			type = payload[:activity_type]
 			message = payload[:activity_message]
-			taskId = get_or_create_bot_id(payload[:activity_task_id])
+
+			# Note: the task id here contains the "Applications/" prefix and slashes that the JSON returned for the release overview does not.
+			#       Need to remove this prefix so the generated bot id is the same regardless of how you first encounter the task
+			incoming_task_id = payload[:activity_task_id].gsub(/Applications\//, "").gsub(/\//, "-")
+
+			taskId = get_or_create_bot_id(incoming_task_id)
 
 			if type == "TASK_OWNER_UPDATED"
 				message =~ /^.*Task '([^']+)'.*to '?([^']+)'?$/
@@ -114,7 +118,7 @@ module Lita
 		end
 
 		def determine_command_bot_id(message, botId)
-			result = XldParameter.new("task")
+			result = Lita::Shared::XlParameter.new("task")
 
 			if botId == nil
 				result.value = get_conversation_context(message, "currentXlrTaskBotId")
@@ -125,7 +129,7 @@ module Lita
 
 			if result.value == nil
 				log.debug("unable to find task id")
-				raise BotError, "Which task do you mean?"
+				raise Lita::Shared::BotError, "Which task do you mean?"
 			end
 
 			result
@@ -135,7 +139,7 @@ module Lita
 			botToTaskKey = "botId:" + botId
 			taskId = redis.get(botToTaskKey)
 			if taskId == nil
-				raise BotError, "Sorry, don't know task " + botId
+				raise Lita::Shared::BotError, "Sorry, don't know task " + botId
 			end
 			taskId	
 		end
@@ -167,7 +171,7 @@ module Lita
 		def execute_with_error_reply(response, &block)
 			begin
 				block.call(response)
-			rescue BotError => ex
+			rescue Lita::Shared::BotError => ex
 				response.reply ex.to_s
 			rescue => ex
 				log.error("Error: " + ex.to_s)

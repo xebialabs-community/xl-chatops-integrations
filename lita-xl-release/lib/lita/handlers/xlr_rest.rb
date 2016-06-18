@@ -18,7 +18,7 @@ module Lita
       def execute_get(url)
         http_response = @http.get(@url + url)
         if is_error(http_response)
-          raise HttpError.new(http_response.status), "Error #{http_response.status} accessing GET URL " + url
+          raise Lita::Shared::HttpError.new(http_response.status), "Error #{http_response.status} accessing GET URL " + url
         end
         http_response
       end
@@ -31,7 +31,7 @@ module Lita
           end
 
         if is_error(http_response)
-          raise HttpError.new(http_response.status), "Error #{http_response.status} accessing POST URL " + url
+          raise Lita::Shared::HttpError.new(http_response.status), "Error #{http_response.status} accessing POST URL " + url
         end
         http_response
       end
@@ -42,7 +42,8 @@ module Lita
       end
 
       def complete_task(taskId, comment = "Complete")
-        http_response = execute_post("/api/v1/tasks/#{taskId}/complete", "{ \"comment\": \"#{comment}\" }")
+        request_id = taskId.gsub(/-/, '/')
+        http_response = execute_post("/api/v1/tasks/Applications/#{request_id}/complete", "{ \"comment\": \"#{comment}\" }")
         MultiJson.load(http_response.body)
       end
 

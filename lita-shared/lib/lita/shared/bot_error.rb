@@ -1,5 +1,5 @@
 module Lita
-  	module Handlers
+  	module Shared
 		class BotError < RuntimeError
 		end
 	end

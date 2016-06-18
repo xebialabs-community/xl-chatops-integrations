@@ -1,7 +1,6 @@
 module Lita
-  module Handlers
-    # An XLD id
-    class XldId
+  module Shared
+    class XlId
       attr_accessor :id
 
       def initialize(id)

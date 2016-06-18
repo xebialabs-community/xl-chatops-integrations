@@ -14,3 +14,4 @@ gem "lita"
 # gem "lita-karma"
 
 gem "lita-xl-deploy", :path => "../lita-xl-deploy"
+gem "lita-xl-release", :path => "../lita-xl-release"

@@ -1,7 +1,6 @@
 module Lita
-  module Handlers
-    # An XLD parameter
-    class XldParameter
+  module Shared
+    class XlParameter
       attr_accessor :name, :value, :defaulted, :error
 
       def initialize(name = nil, value = nil)

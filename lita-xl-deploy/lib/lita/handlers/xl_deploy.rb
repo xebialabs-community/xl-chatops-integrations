@@ -1,8 +1,8 @@
-require_relative './xld_parameter'
-require_relative './xld_id'
+require_relative '../../../../lita-shared/lib/lita/shared/xl_parameter'
+require_relative '../../../../lita-shared/lib/lita/shared/xl_id'
+require_relative '../../../../lita-shared/lib/lita/shared/context'
+require_relative '../../../../lita-shared/lib/lita/shared/bot_error'
 require_relative './xld_rest'
-require_relative './bot_error'
-require_relative './http_error'
 
 #########
 # 
@@ -27,73 +27,73 @@ module Lita
       	# Routes
 		route(/^deployments$/i,
             :list_deployments,
-            command: false,
+            command: true,
             help: { 'deployments' => 'List all current deployments' }
         )
 
 		route(/^environments$/i,
             :list_environments,
-            command: false,
+            command: true,
             help: { 'environments' => 'List all environments' }
         )
 
 		route(/^applications$/i,
             :list_applications,
-            command: false,
+            command: true,
             help: { 'applications' => 'List all applications' }
         )
 
 		route(/^versions(\s([a-z][^\s]+))?$/i,
             :list_versions,
-            command: false,
+            command: true,
             help: { 'versions' => 'List all application versions' }
         )
 
 		route(/^deploy(\s([a-z][^\s]+))?(\s([0-9][^\s]+))?(\sto\s([a-z]+))?$/i,
             :start_deployment,
-            command: false,
+            command: true,
             help: { 'deploy [application] [version] to [environment]' => 'Start a new deployment' }
         )
 
 		route(/^rollback\s?([a-z0-9]{5})?$/i,
             :rollback_task,
-            command: false,
+            command: true,
             help: { 'rollback [task id]' => 'Rollback a task' }
         )
 
 		route(/^start\s?([a-z0-9]{5})?$/i,
             :start_task,
-            command: false,
+            command: true,
             help: { 'start [task id]' => 'Start a task' }
         )
 
 		route(/^abort\s?([a-z0-9]{5})?$/i,
             :abort_task,
-            command: false,
+            command: true,
             help: { 'abort [task id]' => 'Abort a task' }
         )
 
 		route(/^cancel\s?([a-z0-9]{5})?$/i,
             :cancel_task,
-            command: false,
+            command: true,
             help: { 'cancel [task id]' => 'Cancel a task' }
         )
 
 		route(/^archive\s?([a-z0-9]{5})?$/i,
             :archive_task,
-            command: false,
+            command: true,
             help: { 'archive [task id]' => 'Archive a task' }
         )
 
 		route(/^log\s?([a-z0-9]{5})?$/i,
             :log_task,
-            command: false,
+            command: true,
             help: { 'log [task id]' => 'Show a task log' }
         )
 
 		route(/^desc\s?([a-z0-9]{5})?$/i,
             :describe_task,
-            command: false,
+            command: true,
             help: { 'desc [task id]' => 'Describe a task' }
         )
 
@@ -150,7 +150,7 @@ module Lita
 		end
 
 		def determine_command_bot_id(message, botId)
-			result = XldParameter.new("task")
+			result = Lita::Shared::XlParameter.new("task")
 
 			if botId == nil
 				result.value = get_conversation_context(message, "currentTaskBotId")
@@ -161,7 +161,7 @@ module Lita
 
 			if result.value == nil
 				log.debug("unable to find task id")
-				raise BotError, "Which task do you mean?"
+				raise Lita::Shared::BotError, "Which task do you mean?"
 			end
 
 			result
@@ -171,7 +171,7 @@ module Lita
 			botToTaskKey = "botId:" + botId
 			taskId = redis.get(botToTaskKey)
 			if taskId == nil
-				raise BotError, "Sorry, don't know task " + botId
+				raise Lita::Shared::BotError, "Sorry, don't know task " + botId
 			end
 			taskId	
 		end
@@ -206,7 +206,7 @@ module Lita
 		end
 
 		def determine_application(message, http, appId)
-			result = XldParameter.new("application")
+			result = Lita::Shared::XlParameter.new("application")
 			if appId == nil
 				result.value = get_conversation_context(message, "currentApplicationId")
 				result.defaulted = true
@@ -231,7 +231,7 @@ module Lita
 	            			ids = cis.map { |x| x["@ref"]}.join(", ")
 	            			result.error = "Which application do you mean? (candidates: " + ids + ")"
 	          			else
-	            			result.value = XldId.new(cis["@ref"])
+	            			result.value = Lita::Shared::XlId.new(cis["@ref"])
 	          			end
 	          		end
 
@@ -244,7 +244,7 @@ module Lita
 		end
 
 		def determine_version(message, http, applicationId, versionId)
-			result = XldParameter.new("version")
+			result = Lita::Shared::XlParameter.new("version")
 			if versionId == nil
 				result.defaulted = true
 				result.value = get_conversation_context(message, "currentVersionId")
@@ -265,7 +265,7 @@ module Lita
 	            			ids = cis.map { |x| x["@ref"]}.join(", ")
 	            			result.error = "Which version do you mean? (candidates: " + ids + ")"
 	          			else
-	            			result.value = XldId.new(cis["@ref"])
+	            			result.value = Lita::Shared::XlId.new(cis["@ref"])
 	          			end
 	          		end
 				rescue RuntimeError => ex
@@ -277,7 +277,7 @@ module Lita
 		end
 
 		def determine_environment(message, http, envId)
-			result = XldParameter.new("env")
+			result = Lita::Shared::XlParameter.new("env")
 			if envId == nil
 				result.value = get_conversation_context(message, "currentEnvironmentId")
 				result.defaulted = true
@@ -298,7 +298,7 @@ module Lita
 	            			ids = cis.map { |x| x["@ref"]}.join(", ")
 	            			result.error = "Which environment do you mean? (candidates: " + ids + ")"
 	          			else
-	            			result.value = XldId.new(cis["@ref"])
+	            			result.value = Lita::Shared::XlId.new(cis["@ref"])
 	          			end
 	          		end
 				rescue RuntimeError => ex
@@ -325,7 +325,7 @@ module Lita
 		def execute_with_error_reply(response, &block)
 			begin
 				block.call(response)
-			rescue BotError => ex
+			rescue Lita::Shared::BotError => ex
 				response.reply ex.to_s
 			rescue => ex
 				log.error("Error: " + ex.to_s)

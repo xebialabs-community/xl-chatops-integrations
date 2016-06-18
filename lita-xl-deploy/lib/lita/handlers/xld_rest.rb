@@ -3,7 +3,7 @@ require 'cobravsmongoose'
 
 module Lita
   module Handlers
-    # An XLD parameter
+
     class XldRestApi
       attr_accessor :url, :user, :password
 
@@ -19,7 +19,7 @@ module Lita
       def execute_get(url)
         http_response = @http.get(@url + url)
         if is_error(http_response)
-          raise HttpError.new(http_response.status), "Error #{http_response.status} accessing GET URL " + url
+          raise Lita::Shared::HttpError.new(http_response.status), "Error #{http_response.status} accessing GET URL " + url
         end
         http_response
       end
@@ -32,7 +32,7 @@ module Lita
           end
 
         if is_error(http_response)
-          raise HttpError.new(http_response.status), "Error #{http_response.status} accessing POST URL " + url
+          raise Lita::Shared::HttpError.new(http_response.status), "Error #{http_response.status} accessing POST URL " + url
         end
         http_response
       end
@@ -116,7 +116,7 @@ module Lita
         begin
           http_response = execute_post("/deployment/rollback/" + taskId)
           http_response.body
-        rescue HttpError => ex
+        rescue Lita::Shared::HttpError => ex
           if ex.status == 500
             raise BotError, "This task can not be rolled back, task status must be STOPPED, FAILED, ABORTED or EXECUTED."
           else

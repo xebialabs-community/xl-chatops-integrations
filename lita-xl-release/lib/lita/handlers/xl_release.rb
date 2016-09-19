@@ -61,32 +61,34 @@ module Lita
 			# Note: the task id here contains the "Applications/" prefix and slashes that the JSON returned for the release overview does not.
 			#       Need to remove this prefix so the generated bot id is the same regardless of how you first encounter the task
 			incoming_task_id = payload[:activity_task_id].gsub(/Applications\//, "").gsub(/\//, "-")
+			print "handle_release_status_update: #{incoming_task_id} - #{type}: #{message}"
 
 			taskId = get_or_create_bot_id(incoming_task_id)
+			reply = nil
 
 			if type == "TASK_OWNER_UPDATED"
 				message =~ /^.*Task '([^']+)'.*to '?([^']+)'?$/
 				taskName = $1
 				owner = $2
 
-				print "[#{releaseId}] Task '#{taskName}' owner changed to '#{owner}' [#{taskId}]"
+				reply = "[#{releaseId}] Task '#{taskName}' owner changed to '#{owner}' [#{taskId}]"
 			elsif type == "TASK_TASK_TEAM_UPDATED"
 				message =~ /^.*Task '([^']+)'.*to '?([^']+)'?$/
 				taskName = $1
 				owner = $2
 
-				print "[#{releaseId}] Task '#{taskName}' team changed to '#{owner}' [#{taskId}]"
+				reply = "[#{releaseId}] Task '#{taskName}' team changed to '#{owner}' [#{taskId}]"
 			elsif type == "TASK_STARTED"
 				message =~ /^.*Task '([^']+)'$/
 				taskName = $1
 
-				print "[#{releaseId}] Task '#{taskName}' started [#{taskId}]"
+				reply = "[#{releaseId}] Task '#{taskName}' started [#{taskId}]"
 			end
 
-			# if botId != nil
-			# 	rooms = get_room_list_for_task_id(botId)
-			# 	rooms.each { |room| robot.send_message(Source.new(room: room), "[#{botId}] #{payload[:task_status]}") }
-			# end
+			if reply != nil
+				rooms = get_room_list_for_task_id(releaseId)
+				rooms.each { |room| robot.send_message(Source.new(room: room), reply) }
+			end
 		end
 
 		#########
@@ -180,13 +182,6 @@ module Lita
 			end
 		end
 
-		def register_new_task(response, taskId)
-			newBotId = get_or_create_bot_id(taskId)
-			set_conversation_context(response.message, "currentXlrTaskBotId", newBotId)
-			update_room_task_id(response.message.room_object, newBotId)
-			newBotId
-		end
-
 		def output_default_message(response, param1, param2 = nil, param3 = nil)
 			defaultedMessage = ""
 			[ param1, param2, param3].map { |x| 
@@ -219,7 +214,7 @@ module Lita
 						for rel in releases do
 							botId = get_or_create_bot_id(rel["id"])
 							response.reply(print_release(botId, rel))
-#							update_room_task_id(response.message.room_object, botId)
+							update_room_task_id(response.message.room_object, botId)
 						end
 
 						# message = response.message

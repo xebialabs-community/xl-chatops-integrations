@@ -8,6 +8,19 @@ We've written an internal bot to connect XL Deploy to our chat room. This bot, b
 
 The source code is published here for you to try out. Give it a shot & let us know what you think!
 
+# Docker how to run
+
+```
+docker run -v [LITA_CONFIG_DIR]:/litaConfig xl-chatops:0.0.1
+```
+
+With `[LITA_CONFIG_DIR]` the directory containing your lita_config.rb configuration file.
+
+## Docker todo list
+
+* Split Redis and Lita server into 2 containers.
+
+
 # Contents
 
 This repository contains the following:
